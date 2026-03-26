@@ -9,8 +9,8 @@ The simplest AQ chatbot integration. Add a single `<script>` tag to your website
 3. Paste this snippet before `</body>` on any page:
 
 ```html
-<script src="https://app.scheduleclass.com/static/aq-widget.js"
-        data-api-url="https://app.scheduleclass.com"
+<script src="https://app.answerquestions.ai/static/aq-widget.js"
+        data-api-url="https://app.answerquestions.ai"
         data-product-key="YOUR_PRODUCT_KEY"
         data-welcome-message="Hi! Ask me anything."
         data-position="bottom-right"

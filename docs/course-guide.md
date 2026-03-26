@@ -105,7 +105,7 @@ Try changing:
 
 Test your token:
 ```bash
-curl -X POST https://app.scheduleclass.com/answerquestions/validate-token \
+curl -X POST https://app.answerquestions.ai/answerquestions/validate-token \
   -H "Content-Type: application/json" \
   -d '{"productKey": "YOUR_KEY", "token": "YOUR_TOKEN"}'
 ```

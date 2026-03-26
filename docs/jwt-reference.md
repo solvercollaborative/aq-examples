@@ -50,7 +50,7 @@ The presence and validity of a JWT determines what content the chatbot can acces
 Verify your token before deploying:
 
 ```bash
-curl -X POST https://app.scheduleclass.com/answerquestions/validate-token \
+curl -X POST https://app.answerquestions.ai/answerquestions/validate-token \
   -H "Content-Type: application/json" \
   -d '{
     "productKey": "YOUR_PRODUCT_KEY",

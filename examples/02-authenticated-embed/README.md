@@ -39,7 +39,7 @@ Open `frontend/index.html` in a browser. Click "Login" to get a JWT token from y
 Verify your token against AQ's validation endpoint:
 
 ```bash
-curl -X POST https://app.scheduleclass.com/answerquestions/validate-token \
+curl -X POST https://app.answerquestions.ai/answerquestions/validate-token \
   -H "Content-Type: application/json" \
   -d '{"productKey": "YOUR_PRODUCT_KEY", "token": "eyJ..."}'
 ```

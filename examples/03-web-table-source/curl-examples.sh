@@ -6,14 +6,14 @@
 #   - A Clerk JWT token (get from browser dev tools or AQ admin UI)
 #
 # Usage:
-#   export AQ_API="https://app.scheduleclass.com"
+#   export AQ_API="https://app.answerquestions.ai"
 #   export AQ_TOKEN="your-clerk-admin-jwt"
 #   export AQ_TENANT="your-tenant.example.com"
 #   bash curl-examples.sh
 
 set -euo pipefail
 
-AQ_API="${AQ_API:?Set AQ_API to your AQ endpoint (e.g., https://app.scheduleclass.com)}"
+AQ_API="${AQ_API:?Set AQ_API to your AQ endpoint (e.g., https://app.answerquestions.ai)}"
 AQ_TOKEN="${AQ_TOKEN:?Set AQ_TOKEN to your Clerk admin JWT}"
 AQ_TENANT="${AQ_TENANT:?Set AQ_TENANT to your tenant domain}"
 

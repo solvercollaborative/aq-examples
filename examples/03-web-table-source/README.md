@@ -32,7 +32,7 @@ User question → AQ intent classifier → Web Table Source adapter
 
 ```bash
 # Replace with your AQ API URL and admin bearer token
-AQ_API="https://app.scheduleclass.com"
+AQ_API="https://app.answerquestions.ai"
 TOKEN="your-clerk-admin-jwt"
 
 curl -X POST "$AQ_API/answerquestions/admin/web-table-sources" \
