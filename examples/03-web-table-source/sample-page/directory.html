@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Directory - Web Table Source Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #333;
+        }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { background: #1a3a5c; color: #fff; padding: 10px 14px; text-align: left; }
+        td { padding: 8px 14px; border-bottom: 1px solid #e1e8ef; }
+        tr:nth-child(even) { background: #f7f9fc; }
+        .note { background: #fff3cd; padding: 12px; border-radius: 6px; margin: 16px 0; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <h1>Sample Member Directory</h1>
+    <div class="note">
+        This is a standalone test page for the AQ Web Table Source adapter.
+        Point the adapter's <code>source_url</code> at this page to test table extraction.
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Role</th>
+                <th>Member Since</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Maria</td><td>Chen</td><td>maria@lakesidesailing.example</td><td>(312) 555-0142</td><td>Instructor, Admin</td><td>2008</td></tr>
+            <tr><td>James</td><td>Rivera</td><td>james@lakesidesailing.example</td><td>(312) 555-0198</td><td>Instructor</td><td>2015</td></tr>
+            <tr><td>Sarah</td><td>Okonkwo</td><td>sarah@lakesidesailing.example</td><td>(312) 555-0211</td><td>Instructor</td><td>2019</td></tr>
+            <tr><td>Tom</td><td>Lindgren</td><td>tom@lakesidesailing.example</td><td>(312) 555-0267</td><td>Instructor</td><td>2012</td></tr>
+            <tr><td>Priya</td><td>Patel</td><td>priya@example.com</td><td>(773) 555-0334</td><td>Student</td><td>2024</td></tr>
+            <tr><td>David</td><td>Kim</td><td>david.kim@example.com</td><td>(312) 555-0445</td><td>Student</td><td>2025</td></tr>
+            <tr><td>Lisa</td><td>Thompson</td><td>lisa.t@example.com</td><td>(847) 555-0512</td><td>Student</td><td>2023</td></tr>
+            <tr><td>Marcus</td><td>Johnson</td><td>marcus.j@example.com</td><td>(312) 555-0678</td><td>Student, Race Crew</td><td>2022</td></tr>
+            <tr><td>Anika</td><td>Svensson</td><td>anika.s@example.com</td><td>(312) 555-0789</td><td>Student</td><td>2025</td></tr>
+            <tr><td>Robert</td><td>Garcia</td><td>r.garcia@example.com</td><td>(773) 555-0890</td><td>Student, Race Crew</td><td>2021</td></tr>
+        </tbody>
+    </table>
+    <p style="margin-top: 12px; color: #888; font-size: 0.85rem;">Row Count: 10</p>
+</body>
+</html>

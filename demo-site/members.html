@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members - Lakeside Sailing Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .member-status {
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+        .member-status.public-mode {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+        }
+        .member-status.auth-mode {
+            background: #e3f2fd;
+            border: 1px solid #90caf9;
+        }
+        .member-content { margin-top: 32px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">&#9961; Lakeside <span>Sailing</span></a>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Courses</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="members.html" class="active">Members</a></li>
+        </ul>
+    </nav>
+
+    <div class="section">
+        <h2>Members Area</h2>
+        <p>This page demonstrates the difference between public and authenticated
+           AQ chatbot modes. Toggle the switch below to simulate logging in.</p>
+
+        <div class="auth-toggle">
+            <label for="auth-switch">Simulate Member Login</label>
+            <input type="checkbox" id="auth-switch">
+            <span id="auth-badge" class="auth-badge public">Public Mode</span>
+        </div>
+
+        <!-- Public mode content -->
+        <div id="public-content">
+            <div class="member-status public-mode">
+                <strong>Public Mode:</strong> The chatbot can answer general questions about
+                courses, schedule, and location. It does not have access to member-specific
+                information like the directory or account details.
+            </div>
+            <p>To access member features, log in with your Lakeside Sailing account.
+               Members get access to the member directory, course history, and
+               personalized schedule information through the chatbot.</p>
+        </div>
+
+        <!-- Authenticated mode content -->
+        <div id="auth-content" class="hidden">
+            <div class="member-status auth-mode">
+                <strong>Authenticated Mode:</strong> The chatbot now has access to member-specific
+                content. Try asking "Is Maria Chen a member?" or "What courses has James Rivera taught?"
+            </div>
+
+            <div class="member-content">
+                <h3>Member Directory</h3>
+                <p>Current active members of Lakeside Sailing Academy:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Role</th>
+                            <th>Member Since</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Maria</td>
+                            <td>Chen</td>
+                            <td>maria@lakesidesailing.example</td>
+                            <td>(312) 555-0142</td>
+                            <td>Instructor, Admin</td>
+                            <td>2008</td>
+                        </tr>
+                        <tr>
+                            <td>James</td>
+                            <td>Rivera</td>
+                            <td>james@lakesidesailing.example</td>
+                            <td>(312) 555-0198</td>
+                            <td>Instructor</td>
+                            <td>2015</td>
+                        </tr>
+                        <tr>
+                            <td>Sarah</td>
+                            <td>Okonkwo</td>
+                            <td>sarah@lakesidesailing.example</td>
+                            <td>(312) 555-0211</td>
+                            <td>Instructor</td>
+                            <td>2019</td>
+                        </tr>
+                        <tr>
+                            <td>Tom</td>
+                            <td>Lindgren</td>
+                            <td>tom@lakesidesailing.example</td>
+                            <td>(312) 555-0267</td>
+                            <td>Instructor</td>
+                            <td>2012</td>
+                        </tr>
+                        <tr>
+                            <td>Priya</td>
+                            <td>Patel</td>
+                            <td>priya@example.com</td>
+                            <td>(773) 555-0334</td>
+                            <td>Student</td>
+                            <td>2024</td>
+                        </tr>
+                        <tr>
+                            <td>David</td>
+                            <td>Kim</td>
+                            <td>david.kim@example.com</td>
+                            <td>(312) 555-0445</td>
+                            <td>Student</td>
+                            <td>2025</td>
+                        </tr>
+                        <tr>
+                            <td>Lisa</td>
+                            <td>Thompson</td>
+                            <td>lisa.t@example.com</td>
+                            <td>(847) 555-0512</td>
+                            <td>Student</td>
+                            <td>2023</td>
+                        </tr>
+                        <tr>
+                            <td>Marcus</td>
+                            <td>Johnson</td>
+                            <td>marcus.j@example.com</td>
+                            <td>(312) 555-0678</td>
+                            <td>Student, Race Crew</td>
+                            <td>2022</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-alt">
+        <h2>How Authentication Works</h2>
+        <p>In a real integration, your website's login system generates a signed JWT
+           token and passes it to the AQ widget. This token tells AQ who the user is
+           and what content they're authorized to see.</p>
+        <p>See <a href="https://github.com/solvercollaborative/aq-examples/tree/main/examples/02-authenticated-embed">Example 02</a>
+           for complete backend code showing how to generate JWT tokens.</p>
+    </div>
+
+    <footer>
+        <p>Lakeside Sailing Academy &mdash; A fictional business for the
+           <a href="https://github.com/solvercollaborative/aq-examples">AQ Examples</a> demo.
+           Powered by <a href="https://answerquestions.ai">AnswerQuestions</a>.</p>
+    </footer>
+
+    <!-- AQ Widget — starts in public mode -->
+    <script src="https://app.scheduleclass.com/static/aq-widget.js"
+            data-api-url="https://app.scheduleclass.com"
+            data-product-key="DEMO_PRODUCT_KEY"
+            data-welcome-message="Hi! Ask me about Lakeside Sailing Academy."
+            data-position="bottom-right"
+            data-theme="light">
+    </script>
+
+    <script>
+        // Demo: toggle between public and authenticated modes.
+        // In production, your login system would generate and set a real JWT.
+        const toggle = document.getElementById('auth-switch');
+        const badge = document.getElementById('auth-badge');
+        const publicContent = document.getElementById('public-content');
+        const authContent = document.getElementById('auth-content');
+
+        toggle.addEventListener('change', function () {
+            if (this.checked) {
+                // Simulate authenticated mode
+                badge.textContent = 'Authenticated';
+                badge.className = 'auth-badge authenticated';
+                publicContent.classList.add('hidden');
+                authContent.classList.remove('hidden');
+
+                // In production, you would set a real JWT here:
+                // window.AQWidget.setAuthToken(jwtFromYourBackend);
+                console.log('[AQ Demo] Authenticated mode — in production, call window.AQWidget.setAuthToken(jwt)');
+            } else {
+                // Back to public mode
+                badge.textContent = 'Public Mode';
+                badge.className = 'auth-badge public';
+                publicContent.classList.remove('hidden');
+                authContent.classList.add('hidden');
+
+                // In production: window.AQWidget.setAuthToken(null);
+                console.log('[AQ Demo] Public mode — auth token cleared');
+            }
+        });
+    </script>
+</body>
+</html>

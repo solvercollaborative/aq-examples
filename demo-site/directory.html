@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directory - Lakeside Sailing Academy</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">&#9961; Lakeside <span>Sailing</span></a>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Courses</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="members.html">Members</a></li>
+        </ul>
+    </nav>
+
+    <div class="section">
+        <h2>Member Directory</h2>
+        <p>This page contains a sample HTML table that demonstrates the
+           <strong>Web Table Source</strong> feature. AQ can be configured to scrape
+           this table on-demand, providing fresh data to the chatbot without
+           manual ingestion.</p>
+        <p>See <a href="https://github.com/solvercollaborative/aq-examples/tree/main/examples/03-web-table-source">Example 03</a>
+           for setup instructions.</p>
+
+        <!--
+        This table is the target for AQ's web table adapter.
+        The adapter config maps column indices to field names:
+          0: first_name
+          1: last_name
+          2: email
+          3: phone
+          4: role
+          5: member_since
+        -->
+        <table id="member-directory">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Role</th>
+                    <th>Member Since</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Maria</td>
+                    <td>Chen</td>
+                    <td>maria@lakesidesailing.example</td>
+                    <td>(312) 555-0142</td>
+                    <td>Instructor, Admin</td>
+                    <td>2008</td>
+                </tr>
+                <tr>
+                    <td>James</td>
+                    <td>Rivera</td>
+                    <td>james@lakesidesailing.example</td>
+                    <td>(312) 555-0198</td>
+                    <td>Instructor</td>
+                    <td>2015</td>
+                </tr>
+                <tr>
+                    <td>Sarah</td>
+                    <td>Okonkwo</td>
+                    <td>sarah@lakesidesailing.example</td>
+                    <td>(312) 555-0211</td>
+                    <td>Instructor</td>
+                    <td>2019</td>
+                </tr>
+                <tr>
+                    <td>Tom</td>
+                    <td>Lindgren</td>
+                    <td>tom@lakesidesailing.example</td>
+                    <td>(312) 555-0267</td>
+                    <td>Instructor</td>
+                    <td>2012</td>
+                </tr>
+                <tr>
+                    <td>Priya</td>
+                    <td>Patel</td>
+                    <td>priya@example.com</td>
+                    <td>(773) 555-0334</td>
+                    <td>Student</td>
+                    <td>2024</td>
+                </tr>
+                <tr>
+                    <td>David</td>
+                    <td>Kim</td>
+                    <td>david.kim@example.com</td>
+                    <td>(312) 555-0445</td>
+                    <td>Student</td>
+                    <td>2025</td>
+                </tr>
+                <tr>
+                    <td>Lisa</td>
+                    <td>Thompson</td>
+                    <td>lisa.t@example.com</td>
+                    <td>(847) 555-0512</td>
+                    <td>Student</td>
+                    <td>2023</td>
+                </tr>
+                <tr>
+                    <td>Marcus</td>
+                    <td>Johnson</td>
+                    <td>marcus.j@example.com</td>
+                    <td>(312) 555-0678</td>
+                    <td>Student, Race Crew</td>
+                    <td>2022</td>
+                </tr>
+                <tr>
+                    <td>Anika</td>
+                    <td>Svensson</td>
+                    <td>anika.s@example.com</td>
+                    <td>(312) 555-0789</td>
+                    <td>Student</td>
+                    <td>2025</td>
+                </tr>
+                <tr>
+                    <td>Robert</td>
+                    <td>Garcia</td>
+                    <td>r.garcia@example.com</td>
+                    <td>(773) 555-0890</td>
+                    <td>Student, Race Crew</td>
+                    <td>2021</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-top: 16px; color: var(--text-light); font-size: 0.85rem;">
+            Row Count: 10
+        </p>
+    </div>
+
+    <footer>
+        <p>Lakeside Sailing Academy &mdash; A fictional business for the
+           <a href="https://github.com/solvercollaborative/aq-examples">AQ Examples</a> demo.
+           Powered by <a href="https://answerquestions.ai">AnswerQuestions</a>.</p>
+    </footer>
+</body>
+</html>

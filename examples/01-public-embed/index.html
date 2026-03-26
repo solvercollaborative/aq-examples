@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQ Public Embed Example</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 { color: #1a1a2e; }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        .note {
+            background: #e8f4fd;
+            border-left: 4px solid #2196F3;
+            padding: 12px 16px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>AQ Public Embed Example</h1>
+    <p>This page demonstrates the simplest AQ chatbot integration: a public embed
+       using only a product key. No backend code is required.</p>
+
+    <div class="note">
+        <strong>Try it:</strong> Click the chat icon in the bottom-right corner to ask a question.
+    </div>
+
+    <h2>How It Works</h2>
+    <p>The chatbot widget is loaded by a single <code>&lt;script&gt;</code> tag at the
+       bottom of this page. It connects to the AQ API using your product key, which
+       scopes responses to your tenant's public knowledge base content.</p>
+
+    <h2>Sample Content</h2>
+    <p>This page belongs to a fictional business. The chatbot can answer questions
+       about the content that has been ingested into its knowledge base.</p>
+
+    <!--
+    AQ Widget Embed — Public Mode
+    Replace YOUR_PRODUCT_KEY with the product key from your AQ admin dashboard.
+    Replace the data-api-url with your AQ API endpoint.
+    -->
+    <script src="https://app.scheduleclass.com/static/aq-widget.js"
+            data-api-url="https://app.scheduleclass.com"
+            data-product-key="YOUR_PRODUCT_KEY"
+            data-welcome-message="Hi! Ask me anything about our services."
+            data-position="bottom-right"
+            data-theme="light">
+    </script>
+</body>
+</html>

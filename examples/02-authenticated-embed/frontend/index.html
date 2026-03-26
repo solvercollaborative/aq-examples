@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQ Authenticated Embed Example</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 { color: #1a1a2e; }
+        .login-form {
+            background: #f7f9fc;
+            border: 1px solid #e1e8ef;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .login-form label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
+            margin-top: 12px;
+        }
+        .login-form input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        button {
+            margin-top: 16px;
+            padding: 10px 24px;
+            background: #1a3a5c;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        button:hover { background: #2a5a8c; }
+        button.logout { background: #c0392b; }
+        button.logout:hover { background: #e74c3c; }
+        .status {
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin: 16px 0;
+            font-size: 0.9rem;
+        }
+        .status.success { background: #e8f5e9; border: 1px solid #a5d6a7; }
+        .status.info { background: #e3f2fd; border: 1px solid #90caf9; }
+        .hidden { display: none; }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        pre {
+            background: #1a1a2e;
+            color: #e8e8e8;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>AQ Authenticated Embed</h1>
+    <p>This example shows how to authenticate users with the AQ chatbot.
+       Your backend generates a signed JWT token, which the frontend passes
+       to the widget.</p>
+
+    <!-- Login form -->
+    <div id="login-section" class="login-form">
+        <h3>Simulate Login</h3>
+        <p style="font-size: 0.9rem; color: #666;">
+            In production, this would be your real login form. The important part
+            is calling your backend to get a JWT token after authentication.
+        </p>
+        <label for="user-id">User ID</label>
+        <input type="text" id="user-id" value="user-123" />
+        <label for="email">Email</label>
+        <input type="email" id="email" value="priya@example.com" />
+        <button onclick="login()">Login &amp; Get AQ Token</button>
+    </div>
+
+    <!-- Authenticated state -->
+    <div id="auth-section" class="hidden">
+        <div class="status success">
+            Authenticated as <strong id="auth-email"></strong>.
+            The chatbot now has access to member-specific content.
+        </div>
+        <button class="logout" onclick="logout()">Logout</button>
+    </div>
+
+    <div id="status-msg"></div>
+
+    <h2>How It Works</h2>
+    <ol>
+        <li>User logs in via your website's auth system</li>
+        <li>Your backend calls <code>POST /api/aq-token</code> to generate a JWT</li>
+        <li>Frontend receives the token and sets it on the widget:
+            <pre>window.AQWidget.setAuthToken(token);</pre>
+        </li>
+        <li>The widget sends the token with every request via <code>X-AQ-Auth-Token</code> header</li>
+        <li>AQ validates the signature and grants access to member-scoped content</li>
+    </ol>
+
+    <!-- AQ Widget -->
+    <script src="https://app.scheduleclass.com/static/aq-widget.js"
+            data-api-url="https://app.scheduleclass.com"
+            data-product-key="YOUR_PRODUCT_KEY"
+            data-welcome-message="Hi! Log in above to access member features."
+            data-position="bottom-right">
+    </script>
+
+    <script>
+        // Token server URL — run the Python or Node server from this example
+        const TOKEN_SERVER = 'http://localhost:8000';
+
+        async function login() {
+            const userId = document.getElementById('user-id').value;
+            const email = document.getElementById('email').value;
+            const statusEl = document.getElementById('status-msg');
+
+            try {
+                const resp = await fetch(`${TOKEN_SERVER}/api/aq-token`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId, email: email }),
+                });
+
+                if (!resp.ok) {
+                    const err = await resp.json();
+                    statusEl.innerHTML = `<div class="status" style="background:#fce4ec;border:1px solid #ef9a9a">Error: ${err.detail || err.error}</div>`;
+                    return;
+                }
+
+                const { token } = await resp.json();
+
+                // Pass the token to the AQ widget
+                if (window.AQWidget) {
+                    window.AQWidget.setAuthToken(token);
+                }
+
+                // Update UI
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('auth-section').classList.remove('hidden');
+                document.getElementById('auth-email').textContent = email;
+                statusEl.innerHTML = '<div class="status info">Token set on AQ widget. Try asking member-specific questions in the chat.</div>';
+            } catch (e) {
+                statusEl.innerHTML = `<div class="status" style="background:#fce4ec;border:1px solid #ef9a9a">
+                    Could not reach token server at ${TOKEN_SERVER}. Make sure the Python or Node server is running.
+                </div>`;
+            }
+        }
+
+        function logout() {
+            // Clear the auth token
+            if (window.AQWidget) {
+                window.AQWidget.setAuthToken(null);
+            }
+            document.getElementById('login-section').classList.remove('hidden');
+            document.getElementById('auth-section').classList.add('hidden');
+            document.getElementById('status-msg').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
