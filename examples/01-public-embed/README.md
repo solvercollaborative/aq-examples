@@ -43,7 +43,7 @@ The simplest AQ chatbot integration. Add a single `<script>` tag to your website
 Your product key is configured with a list of allowed domains. The widget will only work on pages served from those domains. To add a domain:
 
 1. Contact your AQ administrator
-2. Provide the domain(s) where you'll embed the widget (e.g., `www.example.com`, `localhost`)
+2. Provide the domain(s) where you'll embed the widget (e.g., `www.engagewith.ai`, `localhost`)
 3. The admin updates `AQ_EMBED_KEYS` to include your domain
 
 ## Next Steps

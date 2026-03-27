@@ -30,9 +30,9 @@ curl -X POST "$AQ_API/answerquestions/admin/web-table-sources" \
   -H "Authorization: Bearer $ADMIN_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "tenant_domain": "your-tenant.example.com",
+    "tenant_domain": "engagewith.ai",
     "name": "Staff Directory",
-    "source_url": "https://intranet.example.com/staff",
+    "source_url": "https://intranet.engagewith.ai/staff",
     "table_selector": { "index": 0 },
     "columns": {
       "0": { "field": "first_name", "type": "text" },
@@ -53,7 +53,7 @@ curl -X POST "$AQ_API/answerquestions/admin/web-table-sources" \
 curl -X POST "$AQ_API/answerquestions/admin/web-table-sources/{id}/test" \
   -H "Authorization: Bearer $ADMIN_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"tenant_domain": "your-tenant.example.com"}'
+  -d '{"tenant_domain": "engagewith.ai"}'
 ```
 
 The test endpoint fetches the page, parses the table, and returns sample rows so you can verify column mapping.
@@ -62,7 +62,7 @@ The test endpoint fetches the page, parses the table, and returns sample rows so
 
 Ask the chatbot a question that triggers the linked intent:
 - "Is Jane Smith a member?"
-- "What department is john@example.com in?"
+- "What department is john@engagewith.ai in?"
 - "Look up Maria Chen"
 
 ## Configuration Reference
@@ -112,7 +112,7 @@ For pages behind a login, first create an auth profile, then reference it:
 {
   "auth_profile_ref": "my-intranet-auth",
   "credential_type": "form_login",
-  "login_url": "https://intranet.example.com/login",
+  "login_url": "https://intranet.engagewith.ai/login",
   "username_field": "Email",
   "password_field": "Password"
 }

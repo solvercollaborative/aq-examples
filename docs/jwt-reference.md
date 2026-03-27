@@ -20,7 +20,7 @@ When you embed the AQ chatbot on your website with user authentication, your bac
 |-------|------|-------------|
 | `sub` | string | Unique user identifier in your system |
 | `email` | string | User's email address |
-| `tenant` | string | Your tenant domain (e.g., `example.com`). Must match the tenant configured for your product key. |
+| `tenant` | string | Your tenant domain (e.g., `engagewith.ai`). Must match the tenant configured for your product key. |
 | `exp` | integer | Expiration time as Unix timestamp. Recommended: 8 hours from issue time. |
 
 ### Optional
@@ -64,8 +64,8 @@ curl -X POST https://app.answerquestions.ai/answerquestions/validate-token \
   "valid": true,
   "claims": {
     "sub": "user-123",
-    "email": "user@example.com",
-    "tenant": "example.com",
+    "email": "user@engagewith.ai",
+    "tenant": "engagewith.ai",
     "exp": 1711929600
   }
 }
@@ -92,8 +92,8 @@ import base64, time, jwt
 secret = base64.b64decode("your-base64-secret")
 token = jwt.encode({
     "sub": "user-123",
-    "email": "user@example.com",
-    "tenant": "example.com",
+    "email": "user@engagewith.ai",
+    "tenant": "engagewith.ai",
     "exp": int(time.time()) + 8 * 3600,
     "iat": int(time.time()),
     "roles": ["member"],
@@ -106,7 +106,7 @@ token = jwt.encode({
 const jwt = require('jsonwebtoken');
 const secret = Buffer.from('your-base64-secret', 'base64');
 const token = jwt.sign(
-  { sub: 'user-123', email: 'user@example.com', tenant: 'example.com' },
+  { sub: 'user-123', email: 'user@engagewith.ai', tenant: 'engagewith.ai' },
   secret,
   { algorithm: 'HS256', expiresIn: '8h' }
 );

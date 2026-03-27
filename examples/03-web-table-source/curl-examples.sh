@@ -8,7 +8,7 @@
 # Usage:
 #   export AQ_API="https://app.answerquestions.ai"
 #   export AQ_TOKEN="your-clerk-admin-jwt"
-#   export AQ_TENANT="your-tenant.example.com"
+#   export AQ_TENANT="engagewith.ai.com"
 #   bash curl-examples.sh
 
 set -euo pipefail

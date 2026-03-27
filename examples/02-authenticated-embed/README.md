@@ -17,7 +17,7 @@ User logs in → Your backend generates JWT → Frontend sets token on widget �
 cd python
 pip install -r requirements.txt
 export AQ_HMAC_SECRET="<base64-encoded-secret>"
-export AQ_TENANT_DOMAIN="your-tenant.example.com"
+export AQ_TENANT_DOMAIN="engagewith.ai"
 uvicorn server:app --port 8000
 ```
 
@@ -26,7 +26,7 @@ uvicorn server:app --port 8000
 cd node
 npm install
 export AQ_HMAC_SECRET="<base64-encoded-secret>"
-export AQ_TENANT_DOMAIN="your-tenant.example.com"
+export AQ_TENANT_DOMAIN="engagewith.ai"
 node server.js
 ```
 

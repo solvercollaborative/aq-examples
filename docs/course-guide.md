@@ -15,7 +15,7 @@ Hands-on course for setting up an AQ-powered chatbot for your business. Each mod
 
 ### Key Concepts
 
-- **Tenant** — Your organization's isolated space in AQ. Identified by your domain (e.g., `example.com`).
+- **Tenant** — Your organization's isolated space in AQ. Identified by your domain (e.g., `engagewith.ai`).
 - **Knowledge Base** — The content AQ uses to answer questions. Built from your website, documents, and data sources.
 - **RAG Pipeline** — Retrieval-Augmented Generation. AQ searches your knowledge base for relevant content, then uses an LLM to compose a natural-language answer with citations.
 - **Product Key** — An API key that identifies your chatbot embed and scopes it to your tenant.

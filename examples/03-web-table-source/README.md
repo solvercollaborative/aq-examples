@@ -39,7 +39,7 @@ curl -X POST "$AQ_API/answerquestions/admin/web-table-sources" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "tenant_domain": "your-tenant.example.com",
+    "tenant_domain": "engagewith.ai",
     "name": "Member Directory",
     "source_url": "https://demo.answerquestions.ai/directory.html",
     "table_selector": { "index": 0 },
@@ -63,7 +63,7 @@ curl -X POST "$AQ_API/answerquestions/admin/web-table-sources" \
 curl -X POST "$AQ_API/answerquestions/admin/web-table-sources/{source_id}/test" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"tenant_domain": "your-tenant.example.com"}'
+  -d '{"tenant_domain": "engagewith.ai"}'
 ```
 
 This fetches the page, parses the table, and returns sample rows so you can verify the column mapping is correct.
@@ -71,7 +71,7 @@ This fetches the page, parses the table, and returns sample rows so you can veri
 ### 3. List configured sources
 
 ```bash
-curl "$AQ_API/answerquestions/admin/web-table-sources?tenant_domain=your-tenant.example.com" \
+curl "$AQ_API/answerquestions/admin/web-table-sources?tenant_domain=engagewith.ai" \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -103,11 +103,11 @@ curl -X POST "$AQ_API/answerquestions/admin/ingestion/credentials" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "tenant_domain": "your-tenant.example.com",
+    "tenant_domain": "engagewith.ai",
     "profile_ref": "my-directory-auth",
     "credential_type": "form_login",
-    "login_url": "https://members.example.com/login",
-    "username": "bot@example.com",
+    "login_url": "https://members.engagewith.ai/login",
+    "username": "bot@engagewith.ai",
     "password": "...",
     "username_field": "Email",
     "password_field": "Password"
