@@ -165,34 +165,68 @@
            Powered by <a href="https://answerquestions.ai">AnswerQuestions</a>.</p>
     </footer>
 
-    <!-- AQ Widget — starts in public mode -->
-    <script src="https://app-staging.scheduleclass.com/static/aq-widget.js"
-            data-api-url="https://app-staging.scheduleclass.com"
-            data-product-key="aq_demo"
-            data-welcome-message="Hi! Ask me about Lakeside Sailing Academy."
-            data-position="bottom-right"
-            data-theme="light">
+    <!-- Environment-aware config (must load before widget) -->
+    <script src="aq-config.js"></script>
+
+    <!-- AQ Widget — loaded dynamically based on environment -->
+    <script>
+        (function () {
+            var cfg = window.__aqDemoConfig;
+            var s = document.createElement('script');
+            s.src = cfg.widgetScriptUrl;
+            s.setAttribute('data-api-url', cfg.apiUrl);
+            s.setAttribute('data-product-key', 'aq_demo');
+            s.setAttribute('data-welcome-message', 'Hi! Ask me about Lakeside Sailing Academy.');
+            s.setAttribute('data-position', 'bottom-right');
+            s.setAttribute('data-theme', 'light');
+            document.body.appendChild(s);
+        })();
     </script>
 
     <script>
         // Demo: toggle between public and authenticated modes.
-        // In production, your login system would generate and set a real JWT.
-        const toggle = document.getElementById('auth-switch');
-        const badge = document.getElementById('auth-badge');
-        const publicContent = document.getElementById('public-content');
-        const authContent = document.getElementById('auth-content');
+        // When enabled, fetches a short-lived demo JWT from the token server
+        // and sets it on the AQ widget so that authenticated content (e.g.,
+        // member directory lookup) works correctly.
+        var toggle = document.getElementById('auth-switch');
+        var badge = document.getElementById('auth-badge');
+        var publicContent = document.getElementById('public-content');
+        var authContent = document.getElementById('auth-content');
 
-        toggle.addEventListener('change', function () {
+        toggle.addEventListener('change', async function () {
+            var cfg = window.__aqDemoConfig;
             if (this.checked) {
-                // Simulate authenticated mode
-                badge.textContent = 'Authenticated';
+                badge.textContent = 'Authenticating\u2026';
                 badge.className = 'auth-badge authenticated';
                 publicContent.classList.add('hidden');
                 authContent.classList.remove('hidden');
 
-                // In production, you would set a real JWT here:
-                // window.AQWidget.setAuthToken(jwtFromYourBackend);
-                console.log('[AQ Demo] Authenticated mode — in production, call window.AQWidget.setAuthToken(jwt)');
+                // Fetch a short-lived demo JWT from the token server.
+                try {
+                    var resp = await fetch(cfg.tokenServerUrl + '/answerquestions/demo/token', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-AQ-Product-Key': 'aq_demo',
+                        },
+                        body: JSON.stringify({
+                            email: 'maria@engagewith.ai',
+                            name: 'Maria Chen',
+                        }),
+                    });
+                    if (resp.ok) {
+                        var data = await resp.json();
+                        window.AQWidget.setAuthToken(data.token);
+                        badge.textContent = 'Authenticated';
+                        console.log('[AQ Demo] Authenticated as', data.email, '(expires in', data.expiresIn, 's)');
+                    } else {
+                        badge.textContent = 'Auth Failed';
+                        console.warn('[AQ Demo] Demo token request failed:', resp.status, await resp.text());
+                    }
+                } catch (err) {
+                    badge.textContent = 'Auth Failed';
+                    console.error('[AQ Demo] Demo token request error:', err);
+                }
             } else {
                 // Back to public mode
                 badge.textContent = 'Public Mode';
@@ -200,8 +234,8 @@
                 publicContent.classList.remove('hidden');
                 authContent.classList.add('hidden');
 
-                // In production: window.AQWidget.setAuthToken(null);
-                console.log('[AQ Demo] Public mode — auth token cleared');
+                window.AQWidget.setAuthToken(null);
+                console.log('[AQ Demo] Public mode \u2014 auth token cleared');
             }
         });
     </script>
