@@ -15,7 +15,7 @@
 
   var host = location.hostname.toLowerCase();
   var isStaging = host.includes('staging-demo') || host === 'localhost' || host.includes('scschedstgweb');
-  var isProd = host.includes('demo.engagewith.ai') || host.includes('demo.answerquestions.ai') || host.includes('scschedprodweb');
+  var isProd = !isStaging && (host.includes('demo.engagewith.ai') || host.includes('demo.answerquestions.ai') || host.includes('scschedprodweb'));
 
   // Default to staging for safety
   var apiUrl = 'https://app-staging.answerquestions.ai';
