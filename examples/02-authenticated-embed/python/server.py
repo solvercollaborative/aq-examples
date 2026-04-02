@@ -67,10 +67,11 @@ def create_aq_token(req: TokenRequest):
         "sub": req.user_id,
         "email": req.email,
         "tenant": TENANT_DOMAIN,
+        "level": 3,  # Authorization level (0-6). 3 = tenant member with tool access.
         "exp": now + (TOKEN_EXPIRY_HOURS * 3600),
         "iat": now,
-        # Optional claims — include what applies to your system
-        "roles": req.roles,
+        # Optional claims
+        "roles": req.roles,  # Pass-through: returned to your APIs if AQ calls back
     }
 
     token = jwt.encode(claims, secret_bytes, algorithm="HS256")

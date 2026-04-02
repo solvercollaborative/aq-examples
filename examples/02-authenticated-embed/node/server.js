@@ -56,8 +56,9 @@ app.post("/api/aq-token", (req, res) => {
     sub: user_id,
     email: email,
     tenant: TENANT_DOMAIN,
+    level: 3,  // Authorization level (0-6). 3 = tenant member with tool access.
     iat: now,
-    roles: roles,
+    roles: roles,  // Pass-through: returned to your APIs if AQ calls back
   };
 
   const token = jwt.sign(claims, secretBytes, {
