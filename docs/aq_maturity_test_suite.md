@@ -50,20 +50,41 @@ The user gets a confident-sounding partial path. They cannot tell what is missin
 Paste real answers here as they are captured so the demo (and the article) can quote them verbatim. Use one block per run; keep older runs for diff/history.
 
 - 1a (RAG-only)
-  - Captured: _pending_
-  - Source: _e.g., demo.engagewith.ai chatbot, graph layer disabled_
-  - Model: _e.g., gpt-5.4-mini_
+  - Captured: 2026-04-26T17:33:26+00:00
+  - Source: `scripts/aq_maturity_runner.py`, tenant `sailchicago.org`, mode `rag`
+  - Model: `gpt-4o-mini`; embedding `text-embedding-3-small`; top-k 8
   - Answer:
-    > _paste raw answer here_
-  - Evaluator note: _what is missing or wrong (1-2 sentences)_
+    > To become a Sail Chicago instructor, you need to follow this path of courses:
+    >
+    > 1. **Crew Course** - Start by learning the basics of sailing.
+    > 2. **First Mate Course** - Build on your skills and knowledge.
+    > 3. **Skipper Prep Course** - Prepare for the Skipper qualification.
+    > 4. **On-the-Water (OTW) Skill Standards Assessment** - Pass this assessment during or after your Skipper Prep course.
+    > 5. **Instructor Prep Class** - After gaining at least two years of experience as a skipper at Sail Chicago, you can enroll in this class to prepare for teaching.
+    >
+    > Additionally, you will need to pass the US Sailing Basic Keelboat Exam and the Sail Chicago Rules & Policies Exam, sign the New Skipper Attestation, and complete three private sails as the skipper of record with another Sail Chicago skipper aboard.
+  - Evaluator note: Gives a plausible path, but mixes course names and requirements without showing the complete structured prerequisite chain.
 
 - 1b (GraphRAG)
-  - Captured: _pending_
-  - Source: _e.g., demo.engagewith.ai chatbot, graph layer enabled_
-  - Model: _e.g., gpt-5.4-mini_
+  - Captured: 2026-04-26T17:33:33+00:00
+  - Source: `scripts/aq_maturity_runner.py`, tenant `sailchicago.org`, mode `graphrag`
+  - Model: `gpt-4o-mini`; embedding `text-embedding-3-small`; top-k 8
   - Answer:
-    > _paste raw answer here_
-  - Evaluator note: _what the graph added (1-2 sentences)_
+    > To become a Sail Chicago instructor, you need to follow this path of courses and stages:
+    >
+    > 1. **Interested in Teaching**: Start by being an experienced sailor interested in teaching. You must hold relevant sailing certifications.
+    >
+    > 2. **Prerequisites Met**: Ensure you have the required sailing certifications for the instructor level you are targeting (Basic Keelboat Instructor, Cruising Instructor, or other).
+    >
+    > 3. **Instructor Training**:
+    >    - Complete the **Instructor Prep class**, which prepares you to teach classes at Sail Chicago.
+    >    - You need a minimum of two years of experience as a skipper at Sail Chicago and to be a confident sailor.
+    >    - The training includes shadowing an instructor and attending on-the-water classes.
+    >
+    > 4. **Certified Instructor**: After completing the training and meeting all requirements, you will achieve certification as an instructor.
+    >
+    > This journey is designed to ensure that you are well-prepared to teach sailing effectively and safely.
+  - Evaluator note: Uses the instructor-certification journey graph, but this captured answer is more journey-stage oriented than course-chain oriented; keep it as evidence and refine the graph prompt if the demo needs a stricter ordered-course chain.
 
 ---
 
@@ -88,20 +109,29 @@ The user gets an incomplete list and has no way to know it is incomplete.
 **Captured runs**
 
 - 1a (RAG-only)
-  - Captured: _pending_
-  - Source: _e.g., demo.engagewith.ai chatbot, graph layer disabled_
-  - Model: _e.g., gpt-5.4-mini_
+  - Captured: 2026-04-26T17:33:39+00:00
+  - Source: `scripts/aq_maturity_runner.py`, tenant `sailchicago.org`, mode `rag`
+  - Model: `gpt-4o-mini`; embedding `text-embedding-3-small`; top-k 8
   - Answer:
-    > _paste raw answer here_
-  - Evaluator note: _what is missing or wrong (1-2 sentences)_
+    > Classes taught on the Colgate 26 include:
+    >
+    > - Basic Keelboat - Skipper Prep
+    > - Tiller Time sessions
+    >
+    > These classes focus on teaching sailors to skipper a keelboat and improve their sailing skills.
+  - Evaluator note: Returns a subset and adds Tiller Time, but misses the complete Basic Keelboat course set associated with the Colgate 26.
 
 - 1b (GraphRAG)
-  - Captured: _pending_
-  - Source: _e.g., demo.engagewith.ai chatbot, graph layer enabled_
-  - Model: _e.g., gpt-5.4-mini_
+  - Captured: 2026-04-26T17:33:42+00:00
+  - Source: `scripts/aq_maturity_runner.py`, tenant `sailchicago.org`, mode `graphrag`
+  - Model: `gpt-4o-mini`; embedding `text-embedding-3-small`; top-k 8
   - Answer:
-    > _paste raw answer here_
-  - Evaluator note: _what the graph added (1-2 sentences)_
+    > The Colgate 26 is used for several courses in the Basic Keelboat program at Sail Chicago. The specific classes taught on the Colgate 26 include:
+    >
+    > - Keelboat Crew (BK-CR)
+    > - Keelboat First Mate (BK-FM)
+    > - Keelboat Skipper Prep (BK-SP)
+  - Evaluator note: Reverse traversal over the boat relationship returns the complete structured set of Basic Keelboat courses taught on the Colgate 26.
 
 ---
 
@@ -130,20 +160,30 @@ The graph holds `BK-FM` and `BC-FM` as distinct course nodes, each scoped to its
 **Captured runs**
 
 - 1a (RAG-only)
-  - Captured: _pending_
-  - Source: _e.g., demo.engagewith.ai chatbot, graph layer disabled_
-  - Model: _e.g., gpt-5.4-mini_
+  - Captured: 2026-04-26T17:33:47+00:00
+  - Source: `scripts/aq_maturity_runner.py`, tenant `sailchicago.org`, mode `rag`
+  - Model: `gpt-4o-mini`; embedding `text-embedding-3-small`; top-k 8
   - Answer:
-    > _paste raw answer here_
-  - Evaluator note: _what is missing or wrong (1-2 sentences)_
+    > The 'FM' in the Basic Keelboat program refers to the "First Mate" course, which focuses on mastering boat handling skills and learning to skipper a keelboat under guidance. In contrast, the 'FM' in the Basic Cruising program is not explicitly defined in the provided sources, so its specific meaning or context isn't available.
+    >
+    > In summary:
+    > - **Basic Keelboat Program**: 'FM' stands for "First Mate," emphasizing boat handling and skippers' skills.
+    > - **Basic Cruising Program**: The meaning of 'FM' is not specified in the sources.
+  - Evaluator note: Identifies one meaning but fails to recover the program-scoped meaning for Basic Cruising, demonstrating overloaded vocabulary and missing context.
 
 - 1b (GraphRAG)
-  - Captured: _pending_
-  - Source: _e.g., demo.engagewith.ai chatbot, graph layer enabled_
-  - Model: _e.g., gpt-5.4-mini_
+  - Captured: 2026-04-26T17:33:52+00:00
+  - Source: `scripts/aq_maturity_runner.py`, tenant `sailchicago.org`, mode `graphrag`
+  - Model: `gpt-4o-mini`; embedding `text-embedding-3-small`; top-k 8
   - Answer:
-    > _paste raw answer here_
-  - Evaluator note: _what the graph added (1-2 sentences)_
+    > The 'FM' in the Basic Keelboat program refers to the Keelboat First Mate (BK-FM) course, which is taught on Colgate 26 boats. In contrast, the 'FM' in the Basic Cruising program stands for Cruising First Mate (BC-FM), which is taught on Cruiser 34 boats.
+    >
+    > Key differences include:
+    > - **Keelboat First Mate (BK-FM)**: Focuses on basic keelboat skills and is conducted on smaller Colgate 26 boats.
+    > - **Cruising First Mate (BC-FM)**: Emphasizes cruising-specific skills and is conducted on larger Cruiser 34 boats.
+    >
+    > Typically, completion of the Basic Keelboat course or equivalent experience is required before enrolling in the Cruising First Mate course.
+  - Evaluator note: Distinguishes `BK-FM` and `BC-FM` as separate program-scoped course nodes and produces the comparison the user asked for.
 
 ---
 
