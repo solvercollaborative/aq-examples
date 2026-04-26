@@ -45,6 +45,26 @@ The user gets a confident-sounding partial path. They cannot tell what is missin
 
 `InstructorCert` node is the target. Traverse `REQUIRES_COURSE` backward, then for each course traverse `PREREQUISITE_OF` until the chain bottoms out at the entry-level course. Return the complete ordered chain with the cert as the terminal node. The answer is grounded in structured edges, not in whatever happened to be in the top-k chunks.
 
+**Captured runs**
+
+Paste real answers here as they are captured so the demo (and the article) can quote them verbatim. Use one block per run; keep older runs for diff/history.
+
+- 1a (RAG-only)
+  - Captured: _pending_
+  - Source: _e.g., demo.engagewith.ai chatbot, graph layer disabled_
+  - Model: _e.g., gpt-5.4-mini_
+  - Answer:
+    > _paste raw answer here_
+  - Evaluator note: _what is missing or wrong (1-2 sentences)_
+
+- 1b (GraphRAG)
+  - Captured: _pending_
+  - Source: _e.g., demo.engagewith.ai chatbot, graph layer enabled_
+  - Model: _e.g., gpt-5.4-mini_
+  - Answer:
+    > _paste raw answer here_
+  - Evaluator note: _what the graph added (1-2 sentences)_
+
 ---
 
 ### Question 2: Inverse enumeration
@@ -64,6 +84,24 @@ The user gets an incomplete list and has no way to know it is incomplete.
 **1b (GraphRAG) outcome: satisfactory**
 
 `Boat:Colgate 26` is a single node. Reverse-traverse the `USES_BOAT` edge to enumerate every `Course` node that points at it. The answer is the complete set, deterministically. Adding a new course wires up the edge at ingestion time and the answer updates with no prompt change.
+
+**Captured runs**
+
+- 1a (RAG-only)
+  - Captured: _pending_
+  - Source: _e.g., demo.engagewith.ai chatbot, graph layer disabled_
+  - Model: _e.g., gpt-5.4-mini_
+  - Answer:
+    > _paste raw answer here_
+  - Evaluator note: _what is missing or wrong (1-2 sentences)_
+
+- 1b (GraphRAG)
+  - Captured: _pending_
+  - Source: _e.g., demo.engagewith.ai chatbot, graph layer enabled_
+  - Model: _e.g., gpt-5.4-mini_
+  - Answer:
+    > _paste raw answer here_
+  - Evaluator note: _what the graph added (1-2 sentences)_
 
 ---
 
@@ -89,11 +127,29 @@ In a public demo this is the worst kind of failure: the answer is fluent and con
 
 The graph holds `BK-FM` and `BC-FM` as distinct course nodes, each scoped to its parent program (`BK` vs. `BC`) with its own `audience`, `outcomes`, and `prerequisites`. The synthesizer is given both nodes, with their structural attributes side by side, and produces a clean comparison. Demonstrates that the graph enforces the disambiguation that prose alone cannot.
 
+**Captured runs**
+
+- 1a (RAG-only)
+  - Captured: _pending_
+  - Source: _e.g., demo.engagewith.ai chatbot, graph layer disabled_
+  - Model: _e.g., gpt-5.4-mini_
+  - Answer:
+    > _paste raw answer here_
+  - Evaluator note: _what is missing or wrong (1-2 sentences)_
+
+- 1b (GraphRAG)
+  - Captured: _pending_
+  - Source: _e.g., demo.engagewith.ai chatbot, graph layer enabled_
+  - Model: _e.g., gpt-5.4-mini_
+  - Answer:
+    > _paste raw answer here_
+  - Evaluator note: _what the graph added (1-2 sentences)_
+
 ---
 
 ## Running the Suite
 
-For each question, capture two answers from the same deployed Level-1 chatbot: one with the graph layer disabled (1a) and one with it enabled (1b). Present them side by side. The contrast is the point; the absolute quality of either answer is secondary.
+For each question, capture two answers from the same deployed Level-1 chatbot: one with the graph layer disabled (1a) and one with it enabled (1b). Paste both into the **Captured runs** block under that question, including the date, source endpoint, and model so the comparison is reproducible. Present the captured pair side by side in the Maven lesson; the contrast is the point, and the absolute quality of either answer is secondary.
 
 Audience takeaway: a website chatbot built on embeddings alone has a predictable failure shape: multi-hop chains, inverse enumeration, and overloaded vocabulary. The graph is the smallest capability that closes all three.
 
