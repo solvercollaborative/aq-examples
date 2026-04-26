@@ -61,6 +61,7 @@ See [Example 03](examples/03-web-table-source/) for API examples.
 - [JWT Reference](docs/jwt-reference.md) — Token claims, signing, and troubleshooting
 - [Web Table Source Guide](docs/web-table-source-guide.md) — Configuration and setup
 - [Course Guide](docs/course-guide.md) — Maven cohort walkthrough
+- [AQ Maturity Test Suite](docs/aq_maturity_test_suite.md) — Demo questions that show why GraphRAG and later maturity levels matter
 
 ## Maven Cohort Course
 
