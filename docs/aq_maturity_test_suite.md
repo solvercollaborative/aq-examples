@@ -107,7 +107,8 @@ This file should grow with one section per level boundary:
 - Level 3 -> Level 4: questions whose answer depends on knowing where the user is in a journey.
 - Level 4 -> Level 5: questions whose answer depends on who the user is.
 - Level 5 -> Level 6: questions whose answer depends on mining prior conversations to discover patterns, gaps, or blockers.
-- Level 6 -> Level 7: questions whose answer depends on live data from systems of record or agent-facing tools.
+- Level 6 -> Level 7: questions whose answer depends on live data from systems of record.
 - Level 7 -> Level 8: requests that require controlled create, update, or delete operations on tenant-enabled business objects.
+- Level 8 -> Level 9: requests that require exposing governed AQ knowledge, tools, or actions to other AI agents.
 
 Add the next section when the corresponding Maven lesson is being prepared.
