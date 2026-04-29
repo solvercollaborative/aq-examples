@@ -20,7 +20,7 @@ When you embed the AQ chatbot on your website with user authentication, your bac
 |-------|------|-------------|
 | `sub` | string | Unique user identifier in your system |
 | `email` | string | User's email address |
-| `tenant` | string | Your tenant domain (e.g., `engagewith.ai`). Must match the tenant configured for your product key. |
+| `tenant` | string | Your tenant domain (e.g., `lakeside.com`). Must match the tenant configured for your product key. |
 | `level` | integer | Authorization level (0-6). Determines tool and content access. See **Authorization Levels** below. |
 | `exp` | integer | Expiration time as Unix timestamp. Recommended: 8 hours from issue time. |
 
@@ -88,8 +88,8 @@ curl -X POST https://app.answerquestions.ai/answerquestions/validate-token \
   "valid": true,
   "claims": {
     "sub": "user-123",
-    "email": "user@engagewith.ai",
-    "tenant": "engagewith.ai",
+    "email": "user@lakeside.com",
+    "tenant": "lakeside.com",
     "level": 3,
     "exp": 1711929600
   }
@@ -118,8 +118,8 @@ import base64, time, jwt
 secret = base64.b64decode("your-base64-secret")
 token = jwt.encode({
     "sub": "user-123",
-    "email": "user@engagewith.ai",
-    "tenant": "engagewith.ai",
+    "email": "user@lakeside.com",
+    "tenant": "lakeside.com",
     "level": 3,
     "exp": int(time.time()) + 8 * 3600,
     "iat": int(time.time()),
@@ -135,8 +135,8 @@ const secret = Buffer.from('your-base64-secret', 'base64');
 const token = jwt.sign(
   {
     sub: 'user-123',
-    email: 'user@engagewith.ai',
-    tenant: 'engagewith.ai',
+    email: 'user@lakeside.com',
+    tenant: 'lakeside.com',
     level: 3,
     roles: ['member'],  // pass-through for your callbacks
   },

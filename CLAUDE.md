@@ -17,8 +17,8 @@ docs/                      — JWT reference, web table guide
 
 The `demo-site/` directory is the **authoritative source** for the demo content deployed to:
 
-- **Production**: `demo.engagewith.ai` / `demo.answerquestions.ai`
-- **Staging**: `staging-demo.engagewith.ai`
+- **Production**: `lakeside.answerquestions.ai`
+- **Staging**: `staging-lakeside.answerquestions.ai`
 
 ### How deployment works
 
@@ -30,14 +30,20 @@ Solver_Collaborative_Mac/
   aq-examples/     — this repo (demo site source of truth)
 ```
 
+### Domain architecture
+
+A single Cloudflare wildcard rule (`*.answerquestions.ai`) routes every tenant subdomain to one AQ container. New tenants are provisioned by adding a Cosmos `directory` doc — no DNS, Cloudflare, or Clerk changes per tenant. The container resolves the tenant from the Host header and treats `<x>.answerquestions.ai` as equivalent to `<x>.com` (e.g., `lakeside.answerquestions.ai` ≡ `lakeside.com`).
+
 ### Environment-aware configuration
 
 `demo-site/aq-config.js` detects the hostname at runtime and sets the correct API URLs:
 
-| Hostname | AQ API | Token Server |
-|----------|--------|-------------|
-| `staging-demo.engagewith.ai`, `localhost` | `app-staging.answerquestions.ai` | `app-staging.answerquestions.ai` |
-| `demo.engagewith.ai`, `demo.answerquestions.ai` | `app.answerquestions.ai` | `server.engagewith.ai` |
+| Hostname | AQ API | Token endpoint |
+|----------|--------|----------------|
+| `staging-lakeside.answerquestions.ai`, `localhost` | `app-staging.answerquestions.ai` | same-origin (Cloudflare → AQ container) |
+| `lakeside.answerquestions.ai` | `app.answerquestions.ai` | same-origin (Cloudflare → AQ container) |
+
+The token endpoint is reached on the demo subdomain itself — Cloudflare routes `<demo-subdomain>/answerquestions/demo/token` to the AQ container, which folds in what used to be a separate token server. No CORS preflight, no separate hostname.
 
 All demo HTML pages include `aq-config.js` and load the AQ widget dynamically based on these URLs.
 

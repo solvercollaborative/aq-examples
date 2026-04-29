@@ -39,9 +39,9 @@ curl -X POST "$AQ_API/answerquestions/admin/web-table-sources" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "tenant_domain": "engagewith.ai",
+    "tenant_domain": "lakeside.com",
     "name": "Member Directory",
-    "source_url": "https://demo.answerquestions.ai/directory.html",
+    "source_url": "https://lakeside.answerquestions.ai/directory.html",
     "table_selector": { "index": 0 },
     "columns": {
       "0": { "field": "first_name", "type": "text" },
@@ -63,7 +63,7 @@ curl -X POST "$AQ_API/answerquestions/admin/web-table-sources" \
 curl -X POST "$AQ_API/answerquestions/admin/web-table-sources/{source_id}/test" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"tenant_domain": "engagewith.ai"}'
+  -d '{"tenant_domain": "lakeside.com"}'
 ```
 
 This fetches the page, parses the table, and returns sample rows so you can verify the column mapping is correct.
@@ -71,7 +71,7 @@ This fetches the page, parses the table, and returns sample rows so you can veri
 ### 3. List configured sources
 
 ```bash
-curl "$AQ_API/answerquestions/admin/web-table-sources?tenant_domain=engagewith.ai" \
+curl "$AQ_API/answerquestions/admin/web-table-sources?tenant_domain=lakeside.com" \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -91,7 +91,7 @@ curl "$AQ_API/answerquestions/admin/web-table-sources?tenant_domain=engagewith.a
 
 ## Sample Table Page
 
-The `sample-page/directory.html` file contains an example HTML table you can use for testing. If you're running the demo site, the table is at `https://demo.answerquestions.ai/directory.html`.
+The `sample-page/directory.html` file contains an example HTML table you can use for testing. If you're running the demo site, the table is at `https://lakeside.answerquestions.ai/directory.html`.
 
 ## Auth Profile (for pages behind login)
 
@@ -103,11 +103,11 @@ curl -X POST "$AQ_API/answerquestions/admin/ingestion/credentials" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "tenant_domain": "engagewith.ai",
+    "tenant_domain": "lakeside.com",
     "profile_ref": "my-directory-auth",
     "credential_type": "form_login",
-    "login_url": "https://members.engagewith.ai/login",
-    "username": "bot@engagewith.ai",
+    "login_url": "https://members.lakeside.com/login",
+    "username": "bot@lakeside.com",
     "password": "...",
     "username_field": "Email",
     "password_field": "Password"

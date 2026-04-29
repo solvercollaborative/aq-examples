@@ -7,12 +7,12 @@ the user authenticates, then passes the token to the AQ widget.
 Usage:
     pip install -r requirements.txt
     export AQ_HMAC_SECRET="<base64-encoded-secret-from-aq-admin>"
-    export AQ_TENANT_DOMAIN="engagewith.ai"
+    export AQ_TENANT_DOMAIN="lakeside.com"
     uvicorn server:app --port 8000
 
 Then from your frontend:
     POST http://localhost:8000/api/aq-token
-    Body: {"user_id": "user123", "email": "user@engagewith.ai"}
+    Body: {"user_id": "user123", "email": "user@lakeside.com"}
     Response: {"token": "eyJ..."}
 """
 

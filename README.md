@@ -2,7 +2,7 @@
 
 Integration examples and tools for [AnswerQuestions (AQ)](https://answerquestions.ai) — an AI chatbot that answers questions using your organization's knowledge base.
 
-**Live demo:** [demo.answerquestions.ai](https://demo.answerquestions.ai)
+**Live demo:** [lakeside.answerquestions.ai](https://lakeside.answerquestions.ai)
 
 ## Examples
 
