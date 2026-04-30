@@ -1,11 +1,11 @@
 # Claude Code Project Instructions — AQ Examples
 
-Public-facing integration examples and demo site for [AnswerQuestions (AQ)](https://answerquestions.ai).
+Integration examples and a worked demo site for [AnswerQuestions (AQ)](https://answerquestions.ai). This repo is for developers adding AQ to their own website — the examples are reference implementations to adapt, not a product to fork in place.
 
 ## Repo Structure
 
 ```
-demo-site/       — Lakeside Sailing Academy demo (source of truth for deployed demo)
+demo-site/       — Worked example: a fictional business site wiring all three patterns together
 examples/
   01-public-embed/         — Minimal public chatbot embed
   02-authenticated-embed/  — JWT auth backend (Node + Python examples)
@@ -13,53 +13,32 @@ examples/
 docs/                      — JWT reference, web table guide
 ```
 
-## Demo Site — Source of Truth
+## Using these examples
 
-The `demo-site/` directory is the **authoritative source** for the demo content deployed to:
+Pick the pattern that matches what you're building:
 
-- **Production**: `lakeside.answerquestions.ai`
-- **Staging**: `staging-lakeside.answerquestions.ai`
+| You want to… | Start with |
+|--------------|-----------|
+| Drop a chatbot onto a public page | [`examples/01-public-embed/`](examples/01-public-embed/) |
+| Gate the chatbot behind your own user login | [`examples/02-authenticated-embed/`](examples/02-authenticated-embed/) (Python or Node JWT server) |
+| Feed live HTML-table data into AQ | [`examples/03-web-table-source/`](examples/03-web-table-source/) |
 
-### How deployment works
+See [`README.md`](README.md) for the Quick Start, and [`docs/`](docs/) for the JWT and web-table-source references.
 
-The **saas repo** (`../saas/`) deploys demo files via `scripts/deploy_public_site.sh`, which reads from `../aq-examples/demo-site/` — not from a copy inside saas. Both repos must be checked out as siblings:
+## Demo site
 
-```
-Solver_Collaborative_Mac/
-  saas/            — main SaaS repo (deployment scripts, backend, UI)
-  aq-examples/     — this repo (demo site source of truth)
-```
+The `demo-site/` directory is a fictional "Lakeside Sailing Academy" site that wires all three integration patterns together end-to-end. Treat it as a worked example to read — adapt individual pieces into your own site rather than copying `demo-site/` wholesale.
 
-### Domain architecture
+### Hostname-aware config (pattern to copy)
 
-A single Cloudflare wildcard rule (`*.answerquestions.ai`) routes every tenant subdomain to one AQ container. New tenants are provisioned by adding a Cosmos `directory` doc — no DNS, Cloudflare, or Clerk changes per tenant. The container resolves the tenant from the Host header and treats `<x>.answerquestions.ai` as equivalent to `<x>.com` (e.g., `lakeside.answerquestions.ai` ≡ `lakeside.com`).
+`demo-site/aq-config.js` detects the page's hostname at runtime and selects the matching AQ API URL. This is the pattern most integrators will want: keep one config file, point it at your staging API on a staging host and your production API on a production host. All demo HTML pages include `aq-config.js` and load the AQ widget dynamically based on what it returns.
 
-### Environment-aware configuration
+### Authenticated-mode toggle
 
-`demo-site/aq-config.js` detects the hostname at runtime and sets the correct API URLs:
+`demo-site/members.html` has a "Simulate Member Login" toggle that demonstrates switching the widget between public and authenticated modes:
 
-| Hostname | AQ API | Token endpoint |
-|----------|--------|----------------|
-| `staging-lakeside.answerquestions.ai`, `localhost` | `app-staging.answerquestions.ai` | same-origin (Cloudflare → AQ container) |
-| `lakeside.answerquestions.ai` | `app.answerquestions.ai` | same-origin (Cloudflare → AQ container) |
-
-The token endpoint is reached on the demo subdomain itself — Cloudflare routes `<demo-subdomain>/answerquestions/demo/token` to the AQ container, which folds in what used to be a separate token server. No CORS preflight, no separate hostname.
-
-All demo HTML pages include `aq-config.js` and load the AQ widget dynamically based on these URLs.
-
-### Members page — authenticated mode
-
-`demo-site/members.html` has a "Simulate Member Login" toggle that:
-1. Fetches a short-lived demo JWT from the token server (`POST /answerquestions/demo/token`)
+1. Fetches a short-lived JWT from a token endpoint (`POST /answerquestions/demo/token`)
 2. Calls `window.AQWidget.setAuthToken(token)` to switch the widget to authenticated mode
 3. On toggle off, calls `window.AQWidget.setAuthToken(null)` to return to public mode
 
-This demonstrates the PRD Section 10.6.2 authenticated embed security model end-to-end.
-
-## Making changes
-
-1. Edit files in `demo-site/`
-2. Commit and push to this repo
-3. Deploy via the saas repo: `source ../cr_sch_env_staging && ./scripts/deploy_public_site.sh` (or prod)
-
-The saas repo's deploy script reads from `../aq-examples/demo-site/` at deploy time — no need to copy files between repos.
+In your own site, replace step 1 with your own token endpoint backed by your existing user-auth system. The token-server code in [`examples/02-authenticated-embed/`](examples/02-authenticated-embed/) shows both Python and Node implementations.
