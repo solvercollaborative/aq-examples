@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About this demo — AI Guide for Maven Creators</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="demo-banner">
+        Demo — an independent prototype by Solver Collaborative. Not affiliated with or endorsed by Maven.
+        Answers are drawn from Maven&rsquo;s public help center and may be out of date.
+    </div>
+
+    <nav>
+        <a href="index.html" class="logo">&#9733; AI Guide <span>for Maven</span></a>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">About this demo</a></li>
+        </ul>
+    </nav>
+
+    <div class="section">
+        <h2>What this is</h2>
+        <p>This page demonstrates the <a href="https://answerquestions.ai">AnswerQuestions</a>
+           &ldquo;AI Guide&rdquo; &mdash; an embeddable assistant that answers a visitor&rsquo;s
+           questions using a specific body of knowledge. Here, that knowledge is Maven&rsquo;s
+           publicly available help content about building and running cohort-based courses.</p>
+        <p>It is an independent prototype built by Solver Collaborative to evaluate how well an
+           AI Guide can help a new creator learn an unfamiliar platform. It is not affiliated
+           with, endorsed by, or operated by Maven.</p>
+    </div>
+
+    <div class="section section-alt">
+        <h2>How it works</h2>
+        <p>The assistant retrieves passages from a curated knowledge base, then composes a
+           grounded answer with citations rather than free-associating. The knowledge base is
+           built by crawling Maven&rsquo;s public help center, splitting it into passages, and
+           indexing them for retrieval.</p>
+        <p>Because answers are grounded in that source material, the guide stays close to what
+           the help center actually says &mdash; and it can tell you when it doesn&rsquo;t know.
+           Source content can go stale; always confirm anything time-sensitive against
+           Maven&rsquo;s current documentation.</p>
+    </div>
+
+    <div class="section">
+        <h2>Privacy &amp; scope</h2>
+        <p>This demo answers only from <strong>public</strong> help content. It does not have
+           access to any private Maven account, course roster, or member data, and it does not
+           ask you to sign in.</p>
+    </div>
+
+    <footer>
+        <p>An independent demo of the <a href="https://answerquestions.ai">AnswerQuestions</a>
+           AI Guide, built by Solver Collaborative. Not affiliated with Maven.</p>
+    </footer>
+
+    <script src="aq-config.js"></script>
+    <script>
+        (function () {
+            var cfg = window.__aqDemoConfig;
+            var s = document.createElement('script');
+            s.src = cfg.widgetScriptUrl;
+            s.setAttribute('data-api-url', cfg.apiUrl);
+            s.setAttribute('data-product-key', 'aq_demo_maven');
+            s.setAttribute('data-welcome-message', 'Hi! Ask me anything about building on Maven.');
+            s.setAttribute('data-position', 'bottom-right');
+            s.setAttribute('data-theme', 'light');
+            document.body.appendChild(s);
+        })();
+    </script>
+</body>
+</html>

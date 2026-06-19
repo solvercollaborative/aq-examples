@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Guide for Maven Creators — AnswerQuestions Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="demo-banner">
+        Demo — an independent prototype by Solver Collaborative. Not affiliated with or endorsed by Maven.
+        Answers are drawn from Maven&rsquo;s public help center and may be out of date.
+    </div>
+
+    <nav>
+        <a href="index.html" class="logo">&#9733; AI Guide <span>for Maven</span></a>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About this demo</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <h1>Your AI Guide to building on Maven</h1>
+        <p>Ask anything about creating, launching, and running a cohort-based course on
+           Maven &mdash; from setting up a waitlist to pricing, payouts, and your launch
+           email sequence. The assistant answers from Maven&rsquo;s public help center.</p>
+        <a href="#ask" class="cta">Open the assistant &mdash; bottom right &darr;</a>
+    </div>
+
+    <div class="section" id="ask">
+        <h2>What you can ask</h2>
+        <p>Click the chat bubble in the bottom-right corner and try one of these:</p>
+        <ul class="ask-list">
+            <li>&ldquo;How do I create a course and set up a waitlist on Maven?&rdquo;</li>
+            <li>&ldquo;What&rsquo;s the difference between a lightweight course and a full cohort?&rdquo;</li>
+            <li>&ldquo;How does Maven handle pricing, discounts, and instructor payouts?&rdquo;</li>
+            <li>&ldquo;What do I need to do before my first cohort launches?&rdquo;</li>
+            <li>&ldquo;How do I run my application and enrollment process?&rdquo;</li>
+        </ul>
+    </div>
+
+    <div class="section section-alt">
+        <h2>Built for creators who are still learning the platform</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>Course &amp; waitlist setup</h3>
+                <p>How to stand up a course page, collect a waitlist, and open enrollment.</p>
+            </div>
+            <div class="card">
+                <h3>Cohort &amp; community</h3>
+                <p>Scheduling sessions, managing your cohort, and engaging your community.</p>
+            </div>
+            <div class="card">
+                <h3>Pricing &amp; payouts</h3>
+                <p>Setting price, applying discounts, and how and when you get paid.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>An independent demo of the <a href="https://answerquestions.ai">AnswerQuestions</a>
+           AI Guide, built by Solver Collaborative. Not affiliated with Maven.
+           See <a href="about.html">About this demo</a>.</p>
+    </footer>
+
+    <!-- Environment-aware config (must load before widget) -->
+    <script src="aq-config.js"></script>
+    <script>
+        (function () {
+            var cfg = window.__aqDemoConfig;
+            var s = document.createElement('script');
+            s.src = cfg.widgetScriptUrl;
+            s.setAttribute('data-api-url', cfg.apiUrl);
+            s.setAttribute('data-product-key', 'aq_demo_maven');
+            s.setAttribute('data-welcome-message', 'Hi! I\'m an AI guide to building on Maven. Ask me about course setup, waitlists, pricing, payouts, or launching your first cohort.');
+            s.setAttribute('data-position', 'bottom-right');
+            s.setAttribute('data-theme', 'light');
+            document.body.appendChild(s);
+        })();
+    </script>
+</body>
+</html>
