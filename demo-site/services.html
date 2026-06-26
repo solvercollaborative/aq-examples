@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Courses - Lakeside Sailing Academy</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Cloudflare Turnstile — DoW I-2 attestation -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
     <nav>
@@ -128,9 +130,32 @@
            &middot; <a href="/privacy.html">Privacy Policy</a></p>
     </footer>
 
+    <!-- Invisible Turnstile: silently proves real browser; callback mints demo JWT for the widget -->
+    <div class="cf-turnstile"
+         data-sitekey="0x4AAAAAADrjmIr7vCVPzLo7"
+         data-appearance="interaction-only"
+         data-callback="__aqOnTurnstile"></div>
+
     <!-- Environment-aware config (must load before widget) -->
     <script src="aq-config.js"></script>
     <script>
+        // Attestation flow (DoW I-2): Turnstile proves real browser → mint demo JWT → auth widget.
+        var __aqToken = null, __aqWidgetReady = false;
+        function __aqApplyToken() {
+            if (__aqToken && __aqWidgetReady && window.AQWidget) { window.AQWidget.setAuthToken(__aqToken); }
+        }
+        function __aqOnTurnstile(tsToken) {
+            var cfg = window.__aqDemoConfig;
+            fetch(cfg.tokenServerUrl + '/answerquestions/demo/token', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-AQ-Product-Key': 'aq_demo' },
+                body: JSON.stringify({ email: 'visitor@lakeside.answerquestions.ai', name: 'Demo Visitor', turnstileToken: tsToken }),
+            })
+            .then(function(r) { return r.ok ? r.json() : null; })
+            .then(function(d) { if (d && d.token) { __aqToken = d.token; __aqApplyToken(); } })
+            .catch(function() {});
+            if (window.turnstile) { try { window.turnstile.reset(); } catch(e) {} }
+        }
         (function () {
             var cfg = window.__aqDemoConfig;
             var s = document.createElement('script');
@@ -140,6 +165,7 @@
             s.setAttribute('data-welcome-message', 'Hi! Ask me about our courses, pricing, or schedule.');
             s.setAttribute('data-position', 'bottom-right');
             s.setAttribute('data-theme', 'light');
+            s.onload = function() { __aqWidgetReady = true; __aqApplyToken(); };
             document.body.appendChild(s);
         })();
     </script>
