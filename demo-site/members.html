@@ -23,6 +23,9 @@
         .member-content { margin-top: 32px; }
         .hidden { display: none; }
     </style>
+    <!-- Cloudflare Turnstile — denial-of-wallet I-2 attestation (Managed widget).
+         Verifies a real browser before the demo mints a session token. -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
     <nav>
@@ -44,6 +47,10 @@
             <label for="auth-switch">Simulate Member Login</label>
             <input type="checkbox" id="auth-switch">
             <span id="auth-badge" class="auth-badge public">Public Mode</span>
+            <!-- Turnstile attestation: proves a real browser before "Simulate Member
+                 Login" mints a demo session token. Inert until the server enables
+                 TURNSTILE_ENABLED; the badge only appears if a challenge is needed. -->
+            <div id="aq-turnstile" class="cf-turnstile" data-sitekey="0x4AAAAAADrjmIr7vCVPzLo7"></div>
         </div>
 
         <!-- Public mode content -->
@@ -178,7 +185,8 @@
     <footer>
         <p>Lakeside Sailing Academy &mdash; A fictional business for the
            <a href="https://github.com/solvercollaborative/aq-examples">AQ Examples</a> demo.
-           Powered by <a href="https://answerquestions.ai">AnswerQuestions</a>.</p>
+           Powered by <a href="https://answerquestions.ai">AnswerQuestions</a>.
+           &middot; <a href="/privacy">Privacy Policy</a></p>
     </footer>
 
     <!-- Environment-aware config (must load before widget) -->
@@ -217,8 +225,12 @@
                 publicContent.classList.add('hidden');
                 authContent.classList.remove('hidden');
 
-                // Fetch a short-lived demo JWT from the token server.
+                // Fetch a short-lived demo JWT from the token server. When the
+                // server's Turnstile attestation is enabled (TURNSTILE_ENABLED),
+                // the mint requires a fresh Cloudflare Turnstile token proving a
+                // real browser; the server ignores it while the flag is off.
                 try {
+                    var tsToken = (window.turnstile && window.turnstile.getResponse()) || '';
                     var resp = await fetch(cfg.tokenServerUrl + '/answerquestions/demo/token', {
                         method: 'POST',
                         headers: {
@@ -228,6 +240,7 @@
                         body: JSON.stringify({
                             email: 'maria@lakeside.com',
                             name: 'Maria Chen',
+                            turnstileToken: tsToken,
                         }),
                     });
                     if (resp.ok) {
@@ -242,6 +255,10 @@
                 } catch (err) {
                     badge.textContent = 'Auth Failed';
                     console.error('[AQ Demo] Demo token request error:', err);
+                } finally {
+                    // Turnstile tokens are single-use — reset so a fresh one is
+                    // ready if the user toggles again.
+                    if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
                 }
             } else {
                 // Back to public mode
